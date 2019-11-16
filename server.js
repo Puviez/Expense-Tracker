@@ -46,9 +46,9 @@ mongoose.connection.once('open', () => {
 //              Routes
 // =======================================
 app.get('/', (req, res) => {
-    res.send('index route')
+    res.render('index.ejs')
   })
-  
+
 // =======================================
 //              Listener
 // =======================================
