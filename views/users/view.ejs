@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <% include ../partials/head.ejs %>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Welcome <%= user.username%>!
+      </h1>
+      <h3>First Name: <%= user.firstname%></h3>
+      <h3>Last Name: <%= user.lastname%></h3>
+      <h3>Email Address: <%= user.email%></h3>
+      <h3>Age: <%= user.age%></h3>
+      <a href="#" class="waves-effect waves-light btn">Home</a>
+      <a href="/users/<%= user.id %>/edit" class="waves-effect waves-light btn">Edit</a>
+    </div>
+  </body>
+</html>

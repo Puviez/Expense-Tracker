@@ -40,7 +40,7 @@ users.get('/:id/edit', (req,res) => {
 // Update
 users.put('/:id', (req,res) => {
   User.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err,updateUser) => {
-      res.redirect('/users/:id');
+      res.redirect('/users/' + req.params.id);
   });
 });
 
