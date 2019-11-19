@@ -18,7 +18,7 @@ sessions.post('/', (req, res) => {
       }else {
         if(req.body.password == foundUser.password) {
           req.session.currentUser = foundUser
-          res.redirect('/')
+          res.redirect('/app')
           // if passwords don't match, handle the error
         } else {
           res.send('<a href="/">wrong password</a>')
