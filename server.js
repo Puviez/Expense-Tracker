@@ -53,6 +53,8 @@ app.use('/users', userController)
 const sessionsController = require('./controllers/sessions.js')
 app.use('/sessions', sessionsController)
 
+const transactionsController = require('./controllers/app.js')
+app.use('/app',transactionsController)
 // =======================================
 //              Routes
 // =======================================
@@ -62,6 +64,11 @@ app.get('/', (req, res) => {
 	});
   })
 
+app.get('/app', (req, res) => {
+    res.render('./app/index.ejs', {
+		currentUser: req.session.currentUser
+	});
+  })
 // =======================================
 //              Listener
 // =======================================

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../../partials/head.ejs %>
+    <title>Dashboard</title>
+  </head>
+    <body>
+      <div class="container">
+        <h1>Create New Expense</h1>
+        <div class="row">
+          <form class="col s12" action="/app" method="POST">
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="date" type="date" class="validate" name="date" required>
+                <label for="date">Date</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="details" type="text" class="validate" name="details" required>
+                <label for="details">Details</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="classification" type="text" class="validate" name="classification" required>
+                <label for="classification">Classification</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="amount" type="number" class="validate" name="amount">
+                <label for="amount">Amount</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s6">
+                <input id="transaction_type" type="text" class="validate" name="transaction_type">
+                <label for="transaction_type">Transcation Type</label>
+              </div>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+              <i class="material-icons right">send</i>
+            </button>
+            <a href="/app" class="waves-effect waves-light btn">Back</a>
+          </form>
+        </div>
+    </body>
+</html>
+
+Do I need to include the user information as automatic input in the form?
