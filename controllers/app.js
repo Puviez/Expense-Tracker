@@ -11,7 +11,6 @@ trans.get('/new', (req, res) => {
 // Create
 trans.post('/', (req, res) => {
     req.body.owner = req.session.currentUser._id;
-
     Transaction.create(req.body, (err, transaction) => {
       if (err) {
         console.log(err)
@@ -24,7 +23,7 @@ trans.post('/', (req, res) => {
 // Edit 
 trans.get('/:id/edit', (req,res) => {
     Transaction.findById(req.params.id, (err,transaction) => {
-        res.render('users/edit.ejs', {
+        res.render('./app/transactions/edit.ejs', {
             transaction: transaction
         });
     });

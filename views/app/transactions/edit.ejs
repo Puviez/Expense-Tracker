@@ -8,34 +8,34 @@
       <div class="container">
         <h1>Edit Expense</h1>
         <div class="row">
-          <form class="col s12" action="/app" method="POST">
+          <form class="col s12" action="/app/<%= transaction._id%>?_method=PUT" method="POST">
             <div class="row">
               <div class="input-field col s12">
-                <input id="date" type="date" class="validate" name="date" required>
+                <input id="date" type="date" class="validate" name="date" value="<%= transaction.date%>">
                 <label for="date">Date</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12">
-                <input id="details" type="text" class="validate" name="details" required>
+                <input id="details" type="text" class="validate" name="details" value="<%= transaction.details%>">
                 <label for="details">Details</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12">
-                <input id="classification" type="text" class="validate" name="classification" required>
+                <input id="classification" type="text" class="validate" name="classification" value="<%= transaction.classification%>">
                 <label for="classification">Classification</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12">
-                <input id="amount" type="number" class="validate" name="amount">
+                <input id="amount" type="number" class="validate" name="amount" value="<%= transaction.amount%>">
                 <label for="amount">Amount</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s6">
-                <input id="transaction_type" type="text" class="validate" name="transaction_type">
+                <input id="transaction_type" type="text" class="validate" name="transaction_type" value="<%= transaction.transaction_type%>">
                 <label for="transaction_type">Transcation Type</label>
               </div>
             </div>
