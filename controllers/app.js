@@ -10,6 +10,8 @@ trans.get('/new', (req, res) => {
 
 // Create
 trans.post('/', (req, res) => {
+    req.body.owner = req.session.currentUser._id;
+
     Transaction.create(req.body, (err, transaction) => {
       if (err) {
         console.log(err)
@@ -18,5 +20,21 @@ trans.post('/', (req, res) => {
       res.redirect('/app')
     })
   })
+
+// Edit 
+trans.get('/:id/edit', (req,res) => {
+    Transaction.findById(req.params.id, (err,transaction) => {
+        res.render('users/edit.ejs', {
+            transaction: transaction
+        });
+    });
+  });
+  
+  // Update
+  trans.put('/:id', (req,res) => {
+    Transaction.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err,updateUser) => {
+        res.redirect('/app/' + req.params.id);
+    });
+  });
 
 module.exports = trans
