@@ -4,14 +4,14 @@ const User = require('../models/users.js')
 const Transaction = require('../models/transactions.js')
 const Account = require('../models/accounts.js')
 
-// // Index
-// trans.get('/history', (req, res) => {
-//     Transaction.find({}, (err, transaction) => {
-//       res.render('./app/transactions/index.ejs', {
-//         transaction: transaction
-//       });
-//     });
-//   });
+// Index
+acc.get('/all', (req, res) => {
+    Account.find({}, (err, account) => {
+      res.render('./app/accounts/index.ejs', {
+        account: account
+      });
+    });
+  });
   
 // New
 acc.get('/new', (req, res) => {
