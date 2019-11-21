@@ -1,2 +1,43 @@
-New Account Form
-Back Button
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../../partials/head.ejs %>
+    <title>Dashboard</title>
+  </head>
+    <body>
+      <div class="container">
+        <h1>Create New Account</h1>
+        <div class="row">
+          <form class="col s12" action="/acc" method="POST">
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="account_name" type="text" class="validate" name="account_name" required>
+                <label for="account_name">Account Name</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="account_type" type="text" class="validate" name="account_type" required>
+                <label for="account_type">Account Type</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="bank" type="text" class="validate" name="bank" required>
+                <label for="bank">Bank</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s6">
+                <input id="card_name" type="text" class="validate" name="card_name">
+                <label for="card_name">Card Name</label>
+              </div>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+              <i class="material-icons right">send</i>
+            </button>
+            <a href="/acc" class="waves-effect waves-light btn">Back</a>
+          </form>
+        </div>
+    </body>
+</html>

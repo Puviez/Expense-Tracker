@@ -5,7 +5,7 @@ const accountSchema = Schema({
   account_name: {type: String, required: true},
   account_type: {type: String, required: true},
   bank: {type: String, required: true},
-  card_name: type: String,
+  card_name: {type: String},
   owner: { type: Schema.Types.ObjectId, ref: "User" }
 })
 

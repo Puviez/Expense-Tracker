@@ -55,6 +55,9 @@ app.use('/sessions', sessionsController)
 
 const transactionsController = require('./controllers/app.js')
 app.use('/app',transactionsController)
+
+const accountsController = require('./controllers/accounts.js')
+app.use('/acc',accountsController)
 // =======================================
 //              Routes
 // =======================================
@@ -69,6 +72,7 @@ app.get('/app', (req, res) => {
 		currentUser: req.session.currentUser
 	});
   })
+  
 // =======================================
 //              Listener
 // =======================================
