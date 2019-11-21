@@ -1,2 +1,28 @@
-Table With Date Classification Detail Amount
-Link to show 
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <% include ../../partials/head.ejs %>
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <div class="container">
+      <table>
+        <tr>
+          <th>Date</th>
+          <th>Classification</th>
+          <th>Details</th>
+          <th>Amount</th>
+        </tr>
+        <% for(let i in transaction) { %>
+          <tr>
+            <td><a href="./<%= transaction[i].id %>"><%= transaction[i].date %></a></td>
+            <td><a href="./<%= transaction[i].id %>"><%= transaction[i].classification %></a></td>
+            <td><a href="./<%= transaction[i].id %>"><%= transaction[i].details %></a></td>
+            <td><a href="./<%= transaction[i].id %>">$<%= transaction[i].amount %></a></td>
+          </tr>
+        <% } %>
+      </table>
+    </div>
+  </body>
+</html>
+

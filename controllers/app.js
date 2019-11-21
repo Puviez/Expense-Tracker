@@ -3,10 +3,20 @@ const trans = express.Router()
 const User = require('../models/users.js')
 const Transaction = require('../models/transactions.js')
 
+
+// Index
+trans.get('/history', (req, res) => {
+  Transaction.find({}, (err, transaction) => {
+    res.render('./app/transactions/index.ejs', {
+      transaction: transaction
+    });
+  });
+});
+
 // New
 trans.get('/new', (req, res) => {
-    res.render('./app/transactions/new.ejs')
-  })
+    res.render('./app/transactions/new.ejs');
+  });
 
 // Create
 trans.post('/', (req, res) => {
@@ -32,7 +42,7 @@ trans.get('/:id', (req, res) => {
 
 trans.delete('/:id', (req,res) => {
     Transaction.findByIdAndRemove(req.params.id, (err,transaction) => {
-        res.redirect('/app');
+        res.redirect('/app/history');
     });
 });
 
