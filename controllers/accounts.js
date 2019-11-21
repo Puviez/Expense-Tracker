@@ -30,37 +30,35 @@ acc.post('/', (req, res) => {
     })
 })
 
-module.exports = acc
+// Show
+acc.get('/:id', (req, res) => {
+    Account.findById(req.params.id, (err,account) => {
+        res.render('./app/accounts/view.ejs', {
+            account: account
+        });
+    });
+});
+  
+acc.delete('/:id', (req,res) => {
+    Account.findByIdAndRemove(req.params.id, (err,account) => {
+        res.redirect('/acc');
+    });
+});
 
-  
-//   // Show
-//   trans.get('/:id', (req, res) => {
-//       Transaction.findById(req.params.id, (err,transaction) => {
-//           res.render('./app/transactions/show.ejs', {
-//               transaction: transaction
-//           });
-//       });
-//     });
-  
-//   trans.delete('/:id', (req,res) => {
-//       Transaction.findByIdAndRemove(req.params.id, (err,transaction) => {
-//           res.redirect('/app/history');
-//       });
-//   });
-  
-//   // Edit 
-//   trans.get('/:id/edit', (req,res) => {
-//       Transaction.findById(req.params.id, (err,transaction) => {
-//           res.render('./app/transactions/edit.ejs', {
-//               transaction: transaction
-//           });
-//       });
-//     });
-    
-//     // Update
-//     trans.put('/:id', (req,res) => {
-//       Transaction.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err,updateUser) => {
-//           res.redirect('/app/' + req.params.id);
-//       });
-//     });
-  
+// Edit 
+acc.get('/:id/edit', (req,res) => {
+    Account.findById(req.params.id, (err,account) => {
+        res.render('./app/accounts/edit.ejs', {
+            account: account
+        });
+    });
+});
+
+// Update
+acc.put('/:id', (req,res) => {
+    Account.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err,updateAccount) => {
+        res.redirect('/acc/' + req.params.id);
+    });
+});
+
+module.exports = acc
