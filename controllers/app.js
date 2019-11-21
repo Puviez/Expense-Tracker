@@ -20,6 +20,22 @@ trans.post('/', (req, res) => {
     })
   })
 
+
+// Show
+trans.get('/:id', (req, res) => {
+    Transaction.findById(req.params.id, (err,transaction) => {
+        res.render('./app/transactions/show.ejs', {
+            transaction: transaction
+        });
+    });
+  });
+
+trans.delete('/:id', (req,res) => {
+    Transaction.findByIdAndRemove(req.params.id, (err,transaction) => {
+        res.redirect('/app');
+    });
+});
+
 // Edit 
 trans.get('/:id/edit', (req,res) => {
     Transaction.findById(req.params.id, (err,transaction) => {
