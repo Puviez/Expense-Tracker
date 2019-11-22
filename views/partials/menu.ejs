@@ -1,0 +1,17 @@
+<nav>
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Logo</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <% if(currentUser) { %>
+                <li><a href="/app">Home</a></li>
+                <li><a href="/users/<%= currentUser._id %>">My Profile</a></li>
+                <li><a href="/app/history">Transaction History</a></li>
+                <li>
+                    <form action="/sessions?_method=DELETE" method="POST">
+                        <input type="submit" value="Logout" class="waves-effect waves-light btn"/>
+                    </form>
+                </li>
+            <% } %>
+        </ul>
+    </div>
+</nav>

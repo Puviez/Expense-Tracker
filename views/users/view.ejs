@@ -4,6 +4,7 @@
     <% include ../partials/head.ejs %>
   </head>
   <body>
+    <% include ../partials/menu.ejs %>
     <div class="container">
       <h1>Welcome <%= user.username%>!
       </h1>
@@ -11,7 +12,13 @@
       <h3>Last Name: <%= user.lastname%></h3>
       <h3>Email Address: <%= user.email%></h3>
       <h3>Age: <%= user.age%></h3>
-      <a href="#" class="waves-effect waves-light btn">Home</a>
+      <h3>Accounts: 
+        <ul>
+          <% for(i in account){ %>
+            <li><%= account[i].account_name %></li>
+          <%}%>
+        </ul>
+      </h3>
       <a href="/users/<%= user.id %>/edit" class="waves-effect waves-light btn">Edit</a>
     </div>
   </body>

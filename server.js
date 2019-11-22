@@ -65,14 +65,13 @@ app.get('/', (req, res) => {
     res.render('index.ejs', {
 		currentUser: req.session.currentUser
 	});
-  })
+})
 
 app.get('/app', (req, res) => {
     res.render('./app/index.ejs', {
 		currentUser: req.session.currentUser
 	});
-  })
-  
+})
 // =======================================
 //              Listener
 // =======================================

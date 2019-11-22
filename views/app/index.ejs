@@ -5,13 +5,11 @@
     <title>Dashboard</title>
   </head>
   <body>
+    <% include ../partials/menu.ejs %>
     <div class="container">
         <h1><% if(currentUser) { %>
             Welcome <%=currentUser.username%>! This is your dashboard!
             <% } %>
-            <form action="/sessions?_method=DELETE" method="POST">
-                <input type="submit" value="Logout" class="waves-effect waves-light btn"/>
-            </form>
         </h1>
     </div>
   </body>

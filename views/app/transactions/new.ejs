@@ -5,13 +5,14 @@
     <title>Dashboard</title>
   </head>
     <body>
+      <% include ../../partials/menu.ejs %>
       <div class="container">
         <h1>Create New Expense</h1>
         <div class="row">
           <form class="col s12" action="/app" method="POST">
             <div class="row">
               <div class="input-field col s12">
-                <input id="date" type="date" class="validate" name="date" required>
+                <input id="date" type="date" class="validate" name="date" data-date="" data-date-format="DD MMMM YYYY" required>
                 <label for="date">Date</label>
               </div>
             </div>
@@ -37,6 +38,17 @@
               <div class="input-field col s6">
                 <input id="transaction_type" type="text" class="validate" name="transaction_type">
                 <label for="transaction_type">Transcation Type</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s6">
+                <input list="account" name="account" value="Account">
+                <datalist id="account" name="account">
+                    <% for(let i in account){ %>
+                      <option value="<%= account[i].account_name %>"><%= account[i].account_name %></option>
+                    <% } %>
+                </datalist>
+                
               </div>
             </div>
             <button class="btn waves-effect waves-light" type="submit" name="action">Submit

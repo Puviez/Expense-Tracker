@@ -8,15 +8,21 @@ const Account = require('../models/accounts.js')
 trans.get('/history', (req, res) => {
   Transaction.find({}, (err, transaction) => {
     res.render('./app/transactions/index.ejs', {
-      transaction: transaction
+      transaction: transaction,
+      currentUser: req.session.currentUser
     });
   });
 });
 
 // New
 trans.get('/new', (req, res) => {
-    res.render('./app/transactions/new.ejs');
+  Account.find({ owner: req.session.currentUser._id}, (err, account) => {
+    res.render('./app/transactions/new.ejs', {
+      account: account,
+      currentUser: req.session.currentUser
+    });
   });
+});
 
 // Create
 trans.post('/', (req, res) => {
@@ -35,7 +41,8 @@ trans.post('/', (req, res) => {
 trans.get('/:id', (req, res) => {
     Transaction.findById(req.params.id, (err,transaction) => {
         res.render('./app/transactions/show.ejs', {
-            transaction: transaction
+            transaction: transaction,
+            currentUser: req.session.currentUser
         });
     });
   });
@@ -50,10 +57,11 @@ trans.delete('/:id', (req,res) => {
 trans.get('/:id/edit', (req,res) => {
     Transaction.findById(req.params.id, (err,transaction) => {
         res.render('./app/transactions/edit.ejs', {
-            transaction: transaction
+            transaction: transaction,
+            currentUser: req.session.currentUser
         });
+      });
     });
-  });
   
   // Update
   trans.put('/:id', (req,res) => {

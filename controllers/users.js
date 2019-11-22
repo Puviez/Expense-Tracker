@@ -1,10 +1,13 @@
 const express = require('express')
 const users = express.Router()
 const User = require('../models/users.js')
+const Account = require('../models/accounts.js')
 
 // New
 users.get('/new', (req, res) => {
-  res.render('users/new.ejs')
+  res.render('users/new.ejs', {
+    currentUser: req.session.currentUser
+  })
 })
 
 // Create
@@ -22,9 +25,13 @@ users.post('/', (req, res) => {
 // Show
 users.get('/:id', (req, res) => {
   User.findById(req.params.id, (err,user) => {
+    Account.find({ owner: user.id}, (err,account) => {
       res.render('users/view.ejs', {
-          user: user
+          user: user,
+          account: account,
+          currentUser: req.session.currentUser
       });
+    });  
   });
 });
 
@@ -32,7 +39,8 @@ users.get('/:id', (req, res) => {
 users.get('/:id/edit', (req,res) => {
   User.findById(req.params.id, (err,user) => {
       res.render('users/edit.ejs', {
-          user: user
+          user: user,
+          currentUser: req.session.currentUser
       });
   });
 });

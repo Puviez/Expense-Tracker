@@ -3,7 +3,9 @@ const sessions = express.Router()
 const User = require('../models/users.js')
 
 sessions.get('/new', (req, res) => {
-  res.render('sessions/new.ejs')
+  res.render('sessions/new.ejs', {
+    currentUser: req.session.currentUser
+  })
 })
 
 sessions.post('/', (req, res) => {
@@ -18,6 +20,7 @@ sessions.post('/', (req, res) => {
       }else {
         if(req.body.password == foundUser.password) {
           req.session.currentUser = foundUser
+          console.log(req.session.currentUser)
           res.redirect('/app')
           // if passwords don't match, handle the error
         } else {
