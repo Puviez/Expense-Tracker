@@ -56,10 +56,13 @@ trans.delete('/:id', (req,res) => {
 // Edit 
 trans.get('/:id/edit', (req,res) => {
     Transaction.findById(req.params.id, (err,transaction) => {
+      Account.find({ owner: transaction.owner}, (err,account) => {
         res.render('./app/transactions/edit.ejs', {
             transaction: transaction,
+            account: account,
             currentUser: req.session.currentUser
         });
+      });
       });
     });
   

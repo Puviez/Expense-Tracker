@@ -12,13 +12,16 @@
       <h3>Last Name: <%= user.lastname%></h3>
       <h3>Email Address: <%= user.email%></h3>
       <h3>Age: <%= user.age%></h3>
-      <h3>Accounts: 
+      <h3>My Accounts: 
         <ul>
           <% for(i in account){ %>
             <li><%= account[i].account_name %></li>
           <%}%>
         </ul>
+        <a href="/acc/all" class="waves-effect waves-light btn">View Accounts</a>
+        <a href="/acc/new" class="waves-effect waves-light btn">Add New Account</a>
       </h3>
+      
       <a href="/users/<%= user.id %>/edit" class="waves-effect waves-light btn">Edit</a>
     </div>
   </body>

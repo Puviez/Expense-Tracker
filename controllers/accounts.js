@@ -8,14 +8,17 @@ const Account = require('../models/accounts.js')
 acc.get('/all', (req, res) => {
     Account.find({}, (err, account) => {
       res.render('./app/accounts/index.ejs', {
-        account: account
+        account: account,
+        currentUser: req.session.currentUser
       });
     });
   });
   
 // New
 acc.get('/new', (req, res) => {
-    res.render('./app/accounts/new.ejs');
+    res.render('./app/accounts/new.ejs', {
+        currentUser: req.session.currentUser
+    });
 });
 
 // Create
@@ -33,15 +36,19 @@ acc.post('/', (req, res) => {
 // Show
 acc.get('/:id', (req, res) => {
     Account.findById(req.params.id, (err,account) => {
-        res.render('./app/accounts/view.ejs', {
-            account: account
+        Transaction.find({ account: account.name}, (err,transaction) => {
+            res.render('./app/accounts/view.ejs', {
+                account: account,
+                transaction: transaction,
+                currentUser: req.session.currentUser
+            });
         });
     });
 });
   
 acc.delete('/:id', (req,res) => {
     Account.findByIdAndRemove(req.params.id, (err,account) => {
-        res.redirect('/acc');
+        res.redirect('/acc/all');
     });
 });
 
@@ -49,7 +56,8 @@ acc.delete('/:id', (req,res) => {
 acc.get('/:id/edit', (req,res) => {
     Account.findById(req.params.id, (err,account) => {
         res.render('./app/accounts/edit.ejs', {
-            account: account
+            account: account,
+            currentUser: req.session.currentUser
         });
     });
 });
