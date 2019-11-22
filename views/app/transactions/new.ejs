@@ -30,7 +30,7 @@
             </div>
             <div class="row">
               <div class="input-field col s12">
-                <input id="amount" type="number" class="validate" name="amount">
+                <input id="amount" type="number" class="validate" name="amount" step="any">
                 <label for="amount">Amount</label>
               </div>
             </div>
@@ -48,7 +48,6 @@
                       <option value="<%= account[i].account_name %>"><%= account[i].account_name %></option>
                     <% } %>
                 </datalist>
-                
               </div>
             </div>
             <button class="btn waves-effect waves-light" type="submit" name="action">Submit

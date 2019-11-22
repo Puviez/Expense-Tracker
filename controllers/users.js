@@ -2,6 +2,7 @@ const express = require('express')
 const users = express.Router()
 const User = require('../models/users.js')
 const Account = require('../models/accounts.js')
+const bcrypt = require('bcrypt')
 
 // New
 users.get('/new', (req, res) => {
@@ -11,38 +12,47 @@ users.get('/new', (req, res) => {
 })
 
 // Create
-users.post('/', (req, res) => {
+users.post('/' , (req, res) => {
+  req.body.password = bcrypt.hashSync(req.body.password,bcrypt.genSaltSync(10)) 
   User.create(req.body, (err, createdUser) => {
-    if (err) {
-      console.log(err)
+    if(err) {
+      console.log(err);
     }
     console.log(createdUser);
+    // once user is created redirect back to 'welcome page'
     res.redirect('/')
   })
 })
 
-
 // Show
 users.get('/:id', (req, res) => {
-  User.findById(req.params.id, (err,user) => {
-    Account.find({ owner: user.id}, (err,account) => {
-      res.render('users/view.ejs', {
-          user: user,
-          account: account,
-          currentUser: req.session.currentUser
-      });
-    });  
-  });
+  if(req.session.currentUser){
+    User.findById(req.params.id, (err,user) => {
+      Account.find({ owner: user.id}, (err,account) => {
+        res.render('users/view.ejs', {
+            user: user,
+            account: account,
+            currentUser: req.session.currentUser
+        });
+      });  
+    });
+  } else {
+    res.redirect('/sessions/new');
+  }
 });
 
 // Edit 
 users.get('/:id/edit', (req,res) => {
-  User.findById(req.params.id, (err,user) => {
-      res.render('users/edit.ejs', {
-          user: user,
-          currentUser: req.session.currentUser
-      });
-  });
+  if(req.session.currentUser){
+    User.findById(req.params.id, (err,user) => {
+        res.render('users/edit.ejs', {
+            user: user,
+            currentUser: req.session.currentUser
+        });
+    });
+  } else {
+    res.redirect('/sessions/new');
+  }
 });
 
 // Update

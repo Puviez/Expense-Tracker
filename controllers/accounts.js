@@ -6,19 +6,27 @@ const Account = require('../models/accounts.js')
 
 // Index
 acc.get('/all', (req, res) => {
-    Account.find({}, (err, account) => {
-      res.render('./app/accounts/index.ejs', {
-        account: account,
-        currentUser: req.session.currentUser
-      });
-    });
+    if(req.session.currentUser){
+        Account.find({}, (err, account) => {
+            res.render('./app/accounts/index.ejs', {
+                account: account,
+                currentUser: req.session.currentUser
+            });
+        });
+    } else {
+        res.redirect('/sessions/new');
+    }
   });
   
 // New
 acc.get('/new', (req, res) => {
-    res.render('./app/accounts/new.ejs', {
-        currentUser: req.session.currentUser
-    });
+    if(req.session.currentUser){
+        res.render('./app/accounts/new.ejs', {
+            currentUser: req.session.currentUser
+        });
+    } else {
+        res.redirect('/sessions/new');
+    }
 });
 
 // Create
@@ -35,15 +43,19 @@ acc.post('/', (req, res) => {
 
 // Show
 acc.get('/:id', (req, res) => {
-    Account.findById(req.params.id, (err,account) => {
-        Transaction.find({ account: account.name}, (err,transaction) => {
-            res.render('./app/accounts/view.ejs', {
-                account: account,
-                transaction: transaction,
-                currentUser: req.session.currentUser
+    if(req.session.currentUser){
+        Account.findById(req.params.id, (err,account) => {
+            Transaction.find({ account: account.account_name}, (err,transaction) => {
+                res.render('./app/accounts/view.ejs', {
+                    account: account,
+                    transaction: transaction,
+                    currentUser: req.session.currentUser
+                });
             });
         });
-    });
+    } else {
+        res.redirect('/sessions/new');
+    }
 });
   
 acc.delete('/:id', (req,res) => {
@@ -54,12 +66,16 @@ acc.delete('/:id', (req,res) => {
 
 // Edit 
 acc.get('/:id/edit', (req,res) => {
-    Account.findById(req.params.id, (err,account) => {
-        res.render('./app/accounts/edit.ejs', {
-            account: account,
-            currentUser: req.session.currentUser
+    if(req.session.currentUser){
+        Account.findById(req.params.id, (err,account) => {
+            res.render('./app/accounts/edit.ejs', {
+                account: account,
+                currentUser: req.session.currentUser
+            });
         });
-    });
+    } else {
+        res.redirect('/sessions/new');
+    }
 });
 
 // Update
