@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 const transactionSchema = Schema({
   date: {type: Date, required: true},
+  expense_type: {type: String, required: true},
   details: {type: String, required: true},
   classification: {type: String, required: true},
   amount: {type: Number, required: true},

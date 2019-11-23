@@ -4,6 +4,18 @@ const User = require('../models/users.js')
 const Transaction = require('../models/transactions.js')
 const Account = require('../models/accounts.js')
 
+const sum = (arr) => {
+    let total = 0;
+    for(let i in arr){
+      if(arr[i].expense_type === "Expense"){
+        total -= parseFloat(arr[i].amount);
+      } else {
+        total += parseFloat(arr[i].amount);
+      }
+    }
+    return total;
+}
+
 // Index
 acc.get('/all', (req, res) => {
     if(req.session.currentUser){
@@ -49,6 +61,7 @@ acc.get('/:id', (req, res) => {
                 res.render('./app/accounts/view.ejs', {
                     account: account,
                     transaction: transaction,
+                    balance: sum(transaction),
                     currentUser: req.session.currentUser
                 });
             });

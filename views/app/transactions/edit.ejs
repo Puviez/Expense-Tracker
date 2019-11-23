@@ -17,6 +17,15 @@
               </div>
             </div>
             <div class="row">
+              <div class="input-field col s6">
+                <input list="expense_type" name="expense_type" value="<%= transaction.expense_type %>">
+                <datalist id="expense_type" name="expense_type">
+                    <option value="Expense">Expense</option>
+                    <option value="Income">Income</option>
+                </datalist>
+              </div>
+            </div>
+            <div class="row">
               <div class="input-field col s12">
                 <input id="details" type="text" class="validate" name="details" value="<%= transaction.details%>">
                 <label for="details">Details</label>

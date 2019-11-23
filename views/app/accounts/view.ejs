@@ -12,7 +12,8 @@
         <h3>Account Type: <%= account.account_type%></h3>
         <h3>Bank: <%= account.bank%></h3>
         <h3>Card Name: <%= account.card_name%></h3>
-        <h3>Transaction History</h3>
+        <h3>Account Balance: $<%= balance %></h3>
+        <h3>Transaction History </h3>
         <table>
           <tr>
             <th>Date</th>
@@ -22,10 +23,10 @@
           </tr>
           <% for(let i in transaction) { %>
             <tr>
-              <td><a href="./<%= transaction[i].id %>"><%= transaction[i].date %></a></td>
-              <td><a href="./<%= transaction[i].id %>"><%= transaction[i].classification %></a></td>
-              <td><a href="./<%= transaction[i].id %>"><%= transaction[i].details %></a></td>
-              <td><a href="./<%= transaction[i].id %>">$<%= transaction[i].amount %></a></td>
+              <td><a href="/app/<%= transaction[i].id %>"><%= transaction[i].date %></a></td>
+              <td><a href="/app/<%= transaction[i].id %>"><%= transaction[i].classification %></a></td>
+              <td><a href="/app/<%= transaction[i].id %>"><%= transaction[i].details %></a></td>
+              <td><a href="/app/<%= transaction[i].id %>">$<%= transaction[i].amount %></a></td>
             </tr>
           <% } %>
         </table>
